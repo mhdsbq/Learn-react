@@ -13,7 +13,13 @@ npm install
 ```
 npm start
 ```
+<p align="center">
+  <img src="https://github.com/mhdsbq/Learn-react/blob/crypto-forex-converter/readme.gif?raw=true" width="50%" title="react-learn">
+ </p>
 # Notes
+
+### tutorial followed
+* [Web dev Simplified's tutorial](https://www.youtube.com/watch?v=XN5elYWiSuw)
 ### 1
 * make a new functional componont calld calld CurrencyRow which has an input field and a dropdown select
 * import it into app.js and use it to select from and to currency
