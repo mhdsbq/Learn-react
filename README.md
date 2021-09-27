@@ -13,7 +13,7 @@ npm install
 ```
 npm start
 ```
-
+# Notes
 ### 1
 * make a new functional componont calld calld CurrencyRow which has an input field and a dropdown select
 * import it into app.js and use it to select from and to currency
