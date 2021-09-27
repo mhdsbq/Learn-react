@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+### 1
+* make a new functional componont calld calld CurrencyRow which has an input field and a dropdown select
+* import it into app.js and use it to select from and to currency
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 2
+* create a state using ```useState``` to store currency options
+* it's use is explaned below
 
-## Available Scripts
+### 3
+* load currencydata using fetch inside a useEffect hook with empty list( on mount only)
+* from the loaded data, store currency options in ```currencyOptions``` state
+using ```setCurencyOptions```
 
-In the project directory, you can run:
+### 4
+* pass these currency options state to currency row componont imported earlier
+* to use this take in a variable calld props in the componont function
 
-### `npm start`
+### 5 
+* destructure these props inside function componont
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 6
+* use the currencyOptions from props and use map function to populate each symbols as an ```<option>``` tag
+* also set keys
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 7 - seting up default currencies
+* we can pass a selected currency prop to do this 
+* in currency row componont set value to this prop value
 
-### `npm test`
+### 8 
+* to track selected currencies, set up two more states
+* a fromCurrency and a toCurrency 
+### 9
+* PS:FREE API ONLY SUPPORT BASE CURRENCY EUR SO TO CONVERT INR TO USD WE NEED TO CAPTURE BOTH EXCHANGE RATES WITH EUR 
+* THEN CONVERTED AMOUNT = AMOUNT*(TO_RATE/FROM_RATE)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 9
+* pass another prop function, onchangecurrency 
+* receave it on currency row componont as prop and use it onChange of ```<select>``` tag
+* pass a function to set from currency for one componont and set to currency for the other one
 
-### `npm run build`
+## 10
+* setup a state for the input field ie;amount
+* 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## oops the api free version sucks, so just stoping here

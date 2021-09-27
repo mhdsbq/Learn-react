@@ -2,44 +2,81 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import CurrencyRow from './CurrencyRow';
 
-const BASE_URL = 'http://api.exchangeratesapi.io/v1/latest?access_key=aaf526cbbffe70d3ce6101f41f6e08c5'
+const BASE_URL = 'http://api.exchangeratesapi.io/v1/latest?access_key=aaf526cbbffe70d3ce6101f41f6e08c5'// Go on steal it 👤💰
+
 
 function App() {
 
-  const [currencyOptions, setCurrencyOptions] = useState([]) // use state returns an array of initial values and function
+  const [currencyOptions, setCurrencyOptions] = useState([])
   const [fromCurrency, setFromCurrency] = useState()
   const [toCurrency, setToCurrency] = useState()
-  const [exchangeRate, setExchangeRate] = useState()
+
+  const [fromExchangeRate, setFromExchangeRate] = useState()
+  const [ToExchangeRate, setToExchangeRate] = useState()
+
   const [amount, setAmount] = useState(1)
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true)
-  console.log(exchangeRate)
+
+  let fromAmount,toAmount
+  if(amountInFromCurrency && ToExchangeRate && fromExchangeRate){// TODO:refacter.  ?.why this rates are fetched multipple times
+    fromAmount = amount
+    toAmount = (ToExchangeRate/fromExchangeRate)*amount
+  }else if(ToExchangeRate && fromExchangeRate){ // TODO:refacter
+    toAmount = amount
+    fromAmount = (fromExchangeRate/ToExchangeRate)*amount
+  }
 
   useEffect(() => {
     fetch(BASE_URL)
+      .then(res => res.json())
+      .then(data => {
+        const keys = [...Object.keys(data.rates)]
+        setCurrencyOptions(keys)
+        // seting default currency options
+        setFromCurrency('USD')
+        setToCurrency('INR')
+        
+        setFromExchangeRate(data.rates['USD'])
+        setToExchangeRate(data.rates['INR'])
+      })
+  }, []) // runs only once ie; on mount
+
+  useEffect(() => {
+    if(!fromCurrency || !toCurrency) return
+    fetch(`${BASE_URL}&symbols=${fromCurrency},${toCurrency}`)
     .then(res => res.json())
     .then(data => {
-      const firstCurrency = Object.keys(data.rates)[0]
-      setCurrencyOptions([...Object.keys(data.rates)])
-      setFromCurrency(data.base)
-      setToCurrency(firstCurrency)
-      setExchangeRate(data.rates[firstCurrency])
+      setFromExchangeRate(data.rates[fromCurrency])
+      setToExchangeRate(data.rates[toCurrency])
     })
-  }, [])
+  }, [fromCurrency, toCurrency])
+
+  function handleFromAmountChange(event) {
+    setAmountInFromCurrency(true)
+    setAmount(event.target.value)
+  }
+  function handleToAmountChange(event) {
+    setAmountInFromCurrency(false)
+    setAmount(event.target.value)
+  }
 
   return (
     <>
-      <h1>Convert</h1>
+      <h1>Forx Crypto Converter</h1>
       <CurrencyRow 
         currencyOptions = {currencyOptions}
-        selectCurrency = {fromCurrency}
+        defaultCurrency = {fromCurrency}
         onChangeCurrency = {event => setFromCurrency(event.target.value)}
+        amount = {fromAmount} 
+        onChangeAmount = {handleFromAmountChange}
       />
-      <div className="equels"> = </div>
+      <span className="equels"> = </span>
       <CurrencyRow 
         currencyOptions = {currencyOptions}
-        selectCurrency = {toCurrency}
+        defaultCurrency = {toCurrency}
         onChangeCurrency = {event => setToCurrency(event.target.value)}
-
+        amount = {toAmount}
+        onChangeAmount = {handleToAmountChange}
       />
     </>
   );
