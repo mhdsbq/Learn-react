@@ -1,3 +1,19 @@
+
+# Check it out
+* hope you have node.js installed
+### clone
+```cmd
+git clone -b crypto-forex-converter https://github.com/mhdsbq/Learn-react
+```
+### install packages
+```
+npm install
+```
+### run
+```
+npm start
+```
+
 ### 1
 * make a new functional componont calld calld CurrencyRow which has an input field and a dropdown select
 * import it into app.js and use it to select from and to currency
