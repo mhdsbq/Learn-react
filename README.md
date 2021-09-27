@@ -43,4 +43,3 @@ using ```setCurencyOptions```
 * 
 
 
-## oops the api free version sucks, so just stoping here
