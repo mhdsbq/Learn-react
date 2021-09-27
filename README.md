@@ -13,9 +13,11 @@ npm install
 ```
 npm start
 ```
+# sneek
 <p align="center">
   <img src="https://github.com/mhdsbq/Learn-react/blob/crypto-forex-converter/readme.gif?raw=true" width="50%" title="react-learn">
- </p>
+</p>
+ 
 # Notes
 
 ### tutorial followed
